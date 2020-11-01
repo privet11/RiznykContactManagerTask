@@ -1,0 +1,45 @@
+﻿@using ContactManagerTask.Models
+@model Contact
+@{
+    ViewBag.Title = "EditContact";
+}
+
+<h2>EditContact</h2>
+
+
+@using (Html.BeginForm("EditContact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+<fieldset>
+    <legend>Студент</legend>
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="editor-label"><b>Name</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+    </div>
+
+    <div class="editor-label"><b>Date Of Birth</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.DateOfBirth)
+    </div>
+    <div class="editor-label"><b>Ім'я</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Married)
+    </div>
+
+    <div class="editor-label"><b>Phone</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Phone)
+    </div>
+    <div class="editor-label"><b>Salary</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Salary)
+    </div>
+
+    <p>
+        <input type="submit" value="Сохранить" />
+    </p>
+</fieldset>
+}

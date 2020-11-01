@@ -1,0 +1,44 @@
+﻿@using ContactManagerTask.Models
+@using GridMvc.Html
+@model IEnumerable<ContactManagerTask.Models.Contact>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet">
+<link href="@Url.Content("~/Content/boostrap.min.css")" rel="stylesheet">
+<script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+<div class="code-cut">
+    @Html.Grid(Model).Columns(Columns =>
+    {
+   Columns.Add(c => c.Id).Titled("Id").Filterable(true);
+   Columns.Add(c => c.Name).Titled("Name").Filterable(true);
+   Columns.Add(c => c.DateOfBirth).Titled("DateOfBirth").Filterable(true);
+   Columns.Add(c => c.Married).Titled("Married").Filterable(true);
+   Columns.Add(c => c.Phone).Titled("Phone").Filterable(true);
+   Columns.Add(c => c.Salary).Titled("Salary").Filterable(true);
+   Columns.Add().Encoded(false).Sanitized(false).SetWidth(30).
+                                        RenderValueAs(o => Html.ActionLink("Edit", "EditContact", new { id = o.Id }));
+   Columns.Add().Encoded(false).Sanitized(false).SetWidth(30).
+                                        RenderValueAs(o => Html.ActionLink("Delete", "DeleteContact", new { id = o.Id }));
+}).WithPaging(10).Sortable(true)
+</div>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <fieldset>
+        <legend>Select CSV file</legend>
+
+        <div class="editor-field">
+            <input type="file" name="csvFile" />
+        </div>
+
+        <p>
+            <input type="submit" value="Load" />
+        </p>
+    </fieldset>
+}
+
